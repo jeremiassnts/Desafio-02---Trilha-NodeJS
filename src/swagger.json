@@ -1,0 +1,339 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "desafio 02 documentation",
+        "description": "",
+        "version": "1.0.0",
+        "contact": {
+            "email": "jeremiassnts3@gmail.com"
+        }
+    },
+    "paths": {
+        "/users/": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create a user",
+                "description": "Create a new user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "email": "user1@email.com",
+                                    "name": "User 1"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "admin": {
+                                            "type": "boolean"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "created_at": {
+                                            "type": "string"
+                                        },
+                                        "updated_at": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "id": "880a4f69-19b4-48f4-97f7-c3dc4c6bb9df",
+                                    "name": "User 1",
+                                    "admin": false,
+                                    "email": "user@email.com",
+                                    "created_at": "2022-01-19T18:42:59.077Z",
+                                    "updated_at": "2022-01-19T18:42:59.077Z"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "User already exists",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": "User already exists"
+                                    }
+                                },
+                                "example": {
+                                    "error": "User already exists"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "List all",
+                "description": "List all users",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "user_id",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "880a4f69-19b4-48f4-97f7-c3dc4c6bb9df"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "admin": {
+                                                "type": "boolean"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "created_at": {
+                                                "type": "string"
+                                            },
+                                            "updated_at": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "id": "880a4f69-19b4-48f4-97f7-c3dc4c6bb9df",
+                                    "name": "User 1",
+                                    "admin": false,
+                                    "email": "user@email.com",
+                                    "created_at": "2022-01-19T18:42:59.077Z",
+                                    "updated_at": "2022-01-19T18:42:59.077Z"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "User is not valid or is not an admin",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "User is not valid or is not an admin"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{user_id}/admin": {
+            "patch": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Turn user admin",
+                "description": "Turn user admin",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "minimum": 1
+                        },
+                        "in": "path",
+                        "example": "880a4f69-19b4-48f4-97f7-c3dc4c6bb9df"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "admin": {
+                                            "type": "boolean"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "created_at": {
+                                            "type": "string"
+                                        },
+                                        "updated_at": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "id": "880a4f69-19b4-48f4-97f7-c3dc4c6bb9df",
+                                    "name": "User 1",
+                                    "admin": false,
+                                    "email": "user@email.com",
+                                    "created_at": "2022-01-19T18:42:59.077Z",
+                                    "updated_at": "2022-01-19T18:42:59.077Z"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User id is not valid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "User id is not valid"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/:user_id": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Show user",
+                "description": "Get user profile details",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "description": "User id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        "in": "path",
+                        "example": "880a4f69-19b4-48f4-97f7-c3dc4c6bb9df"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "admin": {
+                                            "type": "boolean"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "created_at": {
+                                            "type": "string"
+                                        },
+                                        "updated_at": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "id": "880a4f69-19b4-48f4-97f7-c3dc4c6bb9df",
+                                    "name": "User 1",
+                                    "admin": false,
+                                    "email": "user@email.com",
+                                    "created_at": "2022-01-19T18:42:59.077Z",
+                                    "updated_at": "2022-01-19T18:42:59.077Z"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User id is not valid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "error": "User id is not valid"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
